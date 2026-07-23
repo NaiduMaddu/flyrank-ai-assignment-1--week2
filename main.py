@@ -2,8 +2,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker,declarative_base
+import os
 from sqlalchemy import Column,Integer,String,Boolean
-engine=create_engine("sqlite:///todo.db")
+from dotenv import load_dotenv
+load_dotenv()
+engine=create_engine(os.getenv("DATABASE_URL"))
 Base=declarative_base()
 class Todo(Base):
      __tablename__="tasks"
